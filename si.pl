@@ -67,6 +67,8 @@ elsif ($command eq "get_file")
     $dest_str  = $path_str;  # location
     $dest_str =~ s/[^\\]*$/patch/;
 
+    $tmp_file = "make_svn_result_patch.txt";
+
     open (inf,$path_str) || die ("$path_str");
     @alllines = <inf>;
     close (inf);
@@ -74,7 +76,8 @@ elsif ($command eq "get_file")
     foreach $myline (@alllines)
     {
     	$dest = $myline;
-
+        $is_modify = 1;
+        
     	if ($dest !~ /.*:.*/)
     	{
     	    next;
@@ -103,9 +106,28 @@ elsif ($command eq "get_file")
             $src = "." . $dir . "/";
 
         }
-
-        $dest = $dest_str . $dir;
+        
         $src  = "." . $dir . "/$file";
+
+        system("svn status $src > $tmp_file 2>&1");
+        open (inf,$tmp_file) || die ("$tmp_file!!!");
+        @file_all = <inf>;
+        close (inf);  
+
+        foreach $item (@file_all)
+        {
+            if($item =~ m/^\?/ || $item =~ m/was not found/)
+            {
+                $is_modify = 0;
+            }
+        }
+
+        if ($is_modify != 1)
+        {
+            next;
+        }
+        
+        $dest = $dest_str . $dir;
         
         RecursiveMkdir($dest);
         
