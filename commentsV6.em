@@ -1025,4 +1025,34 @@ macro CmdOpen()
 	ShellExecute("open","CMD.exe",cmd_str,"",1)
 }
 
+macro LookupRefs (symbol)
+{
+    hbuf = NewBuf("Results") // create output buffer
+    if (hbuf == 0)
+        stop
+    SearchForRefs(hbuf, symbol, 0)
+    //SetCurrentBuf(hbuf) // put buffer in a window
+    SaveBufAs(hbuf,"Mxm_files.txt")
+    closeBuf(hbuf)
+}
+
+macro LookupMxm()
+{
+	LookupRefs("__MXM_SUPPORT__")
+	
+	hbuf = GetCurrentBuf()
+
+	sProjRoot = GetProjDir(GetCurrentProj())
+
+	path_str = "\""
+	path_str = cat(path_str, sProjRoot)
+	path_str = cat(path_str, "\"")
+	
+	cmd_str = "/k perl -f "
+	cmd_str = cat(cmd_str,"G:\\git\\script\\sy_get_file.pl ")
+	cmd_str = cat(cmd_str,"si")
+
+	//runcmdline(cmd_str, "",false)
+	ShellExecute("open","CMD.exe",cmd_str, path_str, 1)
+}
 
