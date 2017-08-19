@@ -569,6 +569,16 @@ macro InsertIncludeMacro()
 	InsertLineStr(sz)
 }
 
+macro InsertDefineMacro()
+{
+    hbufClip = GetBufHandle("Clipboard")
+    sz = "#define "
+    
+    sz = cat(sz,GetBufLine(hbufClip,0))
+
+	InsertLineStr(sz)
+}
+
 macro InsertMakMacro()
 {
 	hwnd = GetCurrentWnd()
