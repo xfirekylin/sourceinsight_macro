@@ -17,7 +17,7 @@ $command =~ s/(^\s+|\s+$)//g;
 
 if($command eq "touch")
 {
-    my $file_new  = $ARGV[1];  
+    my $file_new  = $ARGV[1];
 
     if(-e $file_new)
     {

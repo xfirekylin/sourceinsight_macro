@@ -60,7 +60,6 @@ macro SuperBackspace()
 
     // copy current line
     text = GetBufLine(hbuf, ln);
-
     // get string length
     len = strlen(text);
 
@@ -88,21 +87,24 @@ macro SuperBackspace()
         // process Chinese character
         i = ipos;
         count = 0;
-        while (AsciiFromChar(text[i - 1]) >= 160) {
+		c = AsciiFromChar (text[i - 1]);
+		//msg(cat(cat(i,","),c));
+        while (c<=0 || c >= 127) {
             i = i - 1;
             count = count + 1;
-            if (i == 0)
+            if (i == 0 || count>=3)
                 break;
+
+    		c = AsciiFromChar (text[i - 1])
+    		//msg(cat(cat(i,","),c));
         }
+        //msg(count);
         if (count > 0) {
-            // I think it might be a two-byte character
-            num = 2;
-            // This idiot does not support mod and bitwise operators
-            if ((count / 2 * 2 != count) && (ipos < len))
-                ipos = ipos + 1;    // adjust cursor position
+        	num = count;
         }
     }
 
+	//msg(cat(cat(ipos,","),num));
     // keeping safe
     if (ipos - num < 0)
         num = ipos;
