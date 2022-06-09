@@ -810,7 +810,7 @@ macro DoSvnOperation(cmd_str)
 	svn_cmd = cat(svn_cmd,filename)
 	svn_cmd = cat(svn_cmd," /notempfile /closeonend")
 
-	ShellExecute("open","TortoiseProc.exe",svn_cmd,"",1)
+	ShellExecute("open","TortoiseGitProc.exe",svn_cmd,"",1)
 }
 
 macro SvnShowLog()
@@ -830,7 +830,7 @@ macro SvnCommit()
 
 macro SvnUpdate()
 {
-	DoSvnOperation("update");
+	DoSvnOperation("pull");
 }
 
 macro SvnRevert()
@@ -850,7 +850,7 @@ macro SvnBlame()
 	svn_cmd = cat(svn_cmd,filename)
 	svn_cmd = cat(svn_cmd," -r HEAD -v -g /notempfile /closeonend")
 
-	ShellExecute("open","TortoiseProc.exe",svn_cmd,"",1)
+	ShellExecute("open","TortoiseGitProc.exe",svn_cmd,"",1)
 }
 
 macro GetMyDocumentDir()
