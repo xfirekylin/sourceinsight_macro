@@ -466,6 +466,7 @@
 	</Menus>
 	<Keymaps>
 		<Main>
+			<item Command="Tabs To Spaces" Keycode="(CS)Space" />
 			<item Command="Show File in Explorer..." Keycode="(AS)Q" />
 			<item Command="Complete Symbol" Keycode="(C)8" />
 			<item Command="Activate Project Symbol List" Keycode="F7" />
@@ -8081,7 +8082,7 @@
 				SelectMatch="1"
 				FindNonMatch="0"
 				FindOnePerLine="0"
-				FindBackward="0"
+				FindBackward="1"
 				FindWholeWords="1"
 				TouchFiles="0"
 				ReplacePreserveCase="0"
@@ -8297,7 +8298,7 @@
 		<SymbolTypes All="1" />
 	</ProjectReport>
 	<SymbolPane
-		Width="327"
+		Width="310"
 		TextColor="#000000"
 		BackColor="#ffffff"
 		ShowChanges="1"
