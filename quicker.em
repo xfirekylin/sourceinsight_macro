@@ -5175,3 +5175,33 @@ macro InsertTopBottomStr(top,bottom)
     InsBufLine(hbuf, lnFirst, "@szLeft@@top@")
     SetBufIns(hbuf,lnFirst + 1,strlen(szLeft))
 }
+
+macro CombineLine()
+{
+    hwnd = GetCurrentWnd()
+    hbuf = GetCurrentBuf()
+    lnFirst = GetWndSelLnFirst( hwnd )
+    lnCurrent = lnFirst
+    lnLast = GetWndSelLnLast( hwnd )
+    lnOld = 0
+    szDest=""
+    i = lnLast - lnFirst + 1;
+    while ( i>0 )
+    {
+        szLine = GetBufLine(hbuf,lnCurrent)
+        DelBufLine(hbuf,lnCurrent)
+        nLeft = GetLeftBlank(szLine)
+        szLine = TrimString(szLine)
+        ilen = strlen(szLine)
+        if(iLen == 0)
+        {
+            continue
+        }
+
+		szDest = cat(szDest, szLine)
+        i = i - 1
+    }
+    
+    InsBufLine(hbuf, lnFirst, szDest)
+}
+
